@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+  web:
+    image: openmrsvxnaid:3.0.0
+    logging:
+      driver: "local"
+    environment:
+      DB_DATABASE: openmrs
+      DB_HOST: ${DB_HOST}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_CREATE_TABLES: ${INITIAL_STARTUP}    # change to 'true' if using an empty database
+      DB_AUTO_UPDATE: ${INITIAL_STARTUP}      # change to 'true' if using an empty database
+      RUN_OCL_IMPORT: ${INITIAL_STARTUP}      # Runs CIEL Concept on startup, takes ~30min
+      MODULE_WEB_ADMIN: 'true'                # allow web admin on OpenMRS
+      COPY_CFL_MODULES: 'true'                # Installs web/cfl-modules before startup
+      # Biometric properties
+      BIOMETRIC_ENABLE: ${BIOMETRIC_ENABLE}
+      BIOMETRIC_SERVER_HOST: ${BIOMETRIC_SERVER_HOST}
+      BIOMETRIC_SERVER_ADMIN_PORT: ${BIOMETRIC_SERVER_ADMIN_PORT}
+      BIOMETRIC_SERVER_CLIENT_PORT: ${BIOMETRIC_SERVER_CLIENT_PORT}
+      BIOMETRIC_SERVER_MATCHING_THRESHOLD: ${BIOMETRIC_SERVER_MATCHING_THRESHOLD}
+      BIOMETRIC_DB_HOST: ${BIOMETRIC_DB_HOST}
+      BIOMETRIC_DB: ${BIOMETRIC_DB}
+      BIOMETRIC_DB_PORT: ${BIOMETRIC_DB_PORT}
+      BIOMETRIC_DB_USERNAME: ${BIOMETRIC_DB_USERNAME}
+      BIOMETRIC_DB_PASSWORD: ${BIOMETRIC_DB_PASSWORD}
+      BIOMETRIC_DB_FETCH_SIZE: ${BIOMETRIC_DB_FETCH_SIZE}
+    volumes:
+      - web-data:/usr/local/tomcat/.OpenMRS
+    ports:
+      - "${TOMCAT_PORT}:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  web-data:
