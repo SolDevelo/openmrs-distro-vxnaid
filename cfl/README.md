@@ -1,11 +1,12 @@
 # Description
-Run VMP Distribution.
+Run Vxnaid Distribution.
 
-The distribution project consists of docker compose configuration files and resources which make up a VMP distribution
+The distribution project consists of docker compose configuration files and resources which make up a Vxnaid distribution
  (OpenMRS Web Application, modules and other).
 
-The project contains **.env** file which contains the configuration of an environment, the committed version configures
- VMP distribution to run on your local docker, where both application and database docker containers are running. 
+The project contains **.env.example** file which contains the configuration of an environment, the committed version
+ configures Vxnaid distribution to run on your local docker, where both application and database docker containers are
+  running. 
 
 The docker compose configuration files, with suffix .yml, should stay unchanged - with an exception of docker image
  versioning.
@@ -26,16 +27,16 @@ Run script:
 
 ## Production
 
-Build VMP distribution image using ``docker-compose.build.yml``.
+Build Vxnaid distribution image using ``docker-compose.build.yml``.
 
 ```
 sudo docker-compose -f docker-compose.build.yml build web
 ```
 
-Save VMP distribution image into archive. 
+Save Vxnaid distribution image into archive. 
 
 ```
-sudo docker save openmrscfldistrovmp:X.Y.Z | gzip > openmrscfldistrovmp_X.Y.Z.tar.gz
+sudo docker save openmrsvxnaid:X.Y.Z | gzip > openmrsvxnaid.Y.Z.tar.gz
 ```
 
 Distribute the created image together with ``docker-compose.run.yml`` file. 
@@ -45,10 +46,10 @@ The ``.env`` file has to be created during installation, each environment has in
 
 Configure ``.env`` accordingly to the production environment.
 
-Load VMP distribution image.
+Load Vxnaid distribution image.
 
 ```
-sudo docker load < openmrscfldistrovmp_X.Y.Z.tar.gz
+sudo docker load < openmrsvxnaid.Y.Z.tar.gz
 ```
 
 Run docker-compose.run.yml configuration
