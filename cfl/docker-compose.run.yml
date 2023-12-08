@@ -2,7 +2,7 @@ version: '2'
 
 services:
   web:
-    image: openmrsvxnaid:3.0.9
+    image: openmrsvxnaid:4.0.0
     logging:
       driver: "local"
     environment:
